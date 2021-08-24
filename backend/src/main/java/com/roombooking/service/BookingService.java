@@ -23,15 +23,17 @@ public class BookingService {
 	 * @return
 	 */
 	public List<Booking> getBookingDetails() {
+
 		return repository.findAll();
 	}
 	
-	public Booking getBookingDetailsById(int bookingId) {
-		return repository.findById(bookingId).orElse(null);
+	public Booking getBookingDetailsByRoomNumber(int roomNumber) {
+
+		return repository.findById(roomNumber).orElse(null);
 	}
 	
-	public String deleteBooking(int id) {
-		repository.deleteById(id);
-		return "Booking Deleted !!" +id;
+	public String deleteBooking(int roomNumber) {
+		repository.deleteById(roomNumber);
+		return "Booking Deleted !!" +roomNumber;
 	}
 }

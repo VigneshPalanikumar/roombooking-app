@@ -32,10 +32,16 @@ public class BookingController {
 
 		return service.getBookingDetails();
 	}
-	
-	@DeleteMapping("/delete/{id}")
-	public String deleteBooking(@PathVariable int id) {
 
-		return service.deleteBooking(id);
+	@GetMapping("/getbooking")
+	public Booking getBookingDetailsByRoomNumber(@PathVariable int roomNumber) {
+
+		return service.getBookingDetailsByRoomNumber(roomNumber);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public String deleteBooking(@PathVariable int roomNumber) {
+
+		return service.deleteBooking(roomNumber);
 	}
 }
