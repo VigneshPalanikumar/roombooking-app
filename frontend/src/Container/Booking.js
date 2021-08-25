@@ -4,6 +4,9 @@ import Buttons from "../Components/Button/Button";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Modal from "@material-ui/core/Modal";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -14,17 +17,41 @@ const useStyles = makeStyles(() => ({
     marginTop: 25,
     marginBottom: 50,
   },
+  autoComplete: {
+    marginTop: 25,
+  },
+  modal: {
+    background: "black",
+  },
 }));
 
 const Booking = () => {
   const history = useHistory();
+  const roomNumber = [
+    "100",
+    "102",
+    "103",
+    "104",
+    "105",
+    "201",
+    "202",
+    "203",
+    "301",
+    "302",
+    "303",
+    "401",
+    "402",
+    "403",
+  ];
+
   const [bookingDetails, setBookingDetails] = useState({
-    userId: "",
     firstName: "",
     lastName: "",
+    roomNumber: "",
     bookingDate: "",
     bookingTime: "",
   });
+  const [modal, setModal] = useState(false);
   const classes = useStyles();
 
   const handleSubmit = () => {
@@ -33,9 +60,8 @@ const Booking = () => {
       url: "http://localhost:8080/savebooking",
       data: bookingDetails,
     }).then(() => {
-      console.log("Saved");
+      setModal(true);
     });
-    console.log("see the value", bookingDetails);
   };
 
   const handleViewBooking = () => {
@@ -43,12 +69,16 @@ const Booking = () => {
   };
 
   const handleTextBoxChange = (name, e) => {
+    e.persist();
     setBookingDetails((prevState) => ({
       ...prevState,
       [name]: e.target.value,
     }));
+  };
 
-    console.log(e.target.value);
+  const handleModalClose = () => {
+    setModal(false);
+    setBookingDetails({});
   };
 
   return (
@@ -70,13 +100,24 @@ const Booking = () => {
         <InputTextField
           label="Booking Date"
           variant={"outlined"}
+          type="date"
           onChange={(e) => handleTextBoxChange("bookingDate", e)}
         />
         <br />
-        <InputTextField
-          label="Room Number"
-          variant={"outlined"}
-          onChange={(e) => handleTextBoxChange("roomNumber", e)}
+        <Autocomplete
+          id="combo-box-demo"
+          options={roomNumber}
+          className={classes.autoComplete}
+          getOptionLabel={(option) => option}
+          style={{ width: 350 }}
+          renderInput={(params) => (
+            <TextField
+              onChange={(e) => handleTextBoxChange("roomNumber", e)}
+              {...params}
+              label="Room number"
+              variant="outlined"
+            />
+          )}
         />
         <br />
         <InputTextField
@@ -98,6 +139,20 @@ const Booking = () => {
           onClick={handleViewBooking}
         />
       </form>
+      <Modal
+        className={classes.modal}
+        open={modal}
+        onClose={handleModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <Buttons
+          variant="outlined"
+          color="secondary"
+          label="done"
+          onClick={handleModalClose}
+        />
+      </Modal>
     </div>
   );
 };

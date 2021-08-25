@@ -16,6 +16,7 @@ const InputTextField = (props) => {
     <TextField
       required
       label={props.label}
+      type={props.type}
       className={classes.root}
       variant={props.variant}
       defaultValue={props.defaultValue}
