@@ -11,8 +11,3 @@ public class RoombookingApplication {
 	}
 
 }
-
-// unit test very important
-// java docs for all methods
-// global exception handler
-// REadme

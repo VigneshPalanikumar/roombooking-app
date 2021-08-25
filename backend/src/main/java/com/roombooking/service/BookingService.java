@@ -15,28 +15,28 @@ public class BookingService {
 	private BookingRepository repository;
 
 	/**Service method to save the booking details entered by the user
-	 *
-	 * returns the object which has booking data to the 
 	 */
 	public Booking saveBooking(Booking booking) {
 
 		return repository.save(booking);
 	}
 
-	/**
-	 * 
-	 * @return
+	/**Service method to display all the booking details
 	 */
 	public List<Booking> getBookingDetails() {
 
 		return repository.findAll();
 	}
-	
+
+	/**Service method to display details of a particular booking using roomNumber
+	 */
 	public Booking getBookingDetailsByRoomNumber(int roomNumber) {
 
 		return repository.findById(roomNumber).orElse(null);
 	}
-	
+
+	/**Service method to delete the booking
+	 */
 	public String deleteBooking(int roomNumber) {
 		repository.deleteById(roomNumber);
 		return "Booking Deleted !!" +roomNumber;

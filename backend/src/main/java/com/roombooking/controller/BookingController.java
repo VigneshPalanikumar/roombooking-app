@@ -22,24 +22,32 @@ public class BookingController {
 	@Autowired
 	private BookingService service;
 
+	/**Controller method to save the booking details entered by the user
+	 */
 	@PostMapping("/savebooking")
 	public Booking saveBooking(@RequestBody Booking booking) {
 		System.out.println(booking.toString());
 		return service.saveBooking(booking);
 	}
 
+	/**Controller method to display all the booking details
+	 */
 	@GetMapping("/displaybookings")
 	public List<Booking> getBookingDetails() {
 
 		return service.getBookingDetails();
 	}
 
+	/**Controller method to display details of a particular booking using roomNumber
+	 */
 	@GetMapping("/getbooking")
 	public Booking getBookingDetailsByRoomNumber(@PathVariable int roomNumber) {
 
 		return service.getBookingDetailsByRoomNumber(roomNumber);
 	}
 
+	/**Controller method to delete the booking
+	 */
 	@DeleteMapping("/delete/{id}")
 	public String deleteBooking(@PathVariable int roomNumber) {
 
