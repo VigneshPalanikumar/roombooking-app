@@ -1,9 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Booking from "./Container/Booking";
-
+import Routes from "./Routes/route";
 function App() {
-  return <Booking />;
+  return <Routes />;
 }
 
 export default App;

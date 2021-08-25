@@ -15,6 +15,7 @@ public class BookingController {
 	@CrossOrigin("http://vigneshs-air.fritz.box:3000")
 	@GetMapping("/hello")
 	public String hello() {
+
 		return "Hello World";
 	}
 	
